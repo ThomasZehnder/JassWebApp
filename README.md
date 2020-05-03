@@ -1,7 +1,13 @@
 # JassWebApp
 Swiss jass card game
 
+![screen shot](screenshot.png)
+
 Designed to play together during corona time. The rules are not implemented, so be vigilant, players ca break rules like playing with real cards on a table.
+
+Unique game in the world counter clockwise.
+
+All text are in swiis german dialect region St.Gallen :-)
 
 # How to start the game:
 ## Supervisor Page
