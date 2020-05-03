@@ -1,0 +1,42 @@
+{
+  "name": "jass-web-app",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "homepage": "./",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^4.9.9",
+    "@material-ui/icons": "^4.9.1",
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-json-view": "^1.19.1",
+    "react-scripts": "^3.3.0"
+  },
+  "devDependencies": {
+    "ftp-deploy": "^2.3.6"
+  },
+  "scripts": {
+    "start_react_dev": "react-scripts start",
+    "build_react": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "push_git": "git push --set-upstream https://github.com/ThomasZehnder/JassWebApp.git master",
+    "node_express_server": "node server/server.js",
+    "ftpToZhs_productive_ATTENTION": "node zhs_infos/deploy_remove_postfix",
+    "ftpToZhs_development": "node zhs_infos/deploy_dev"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
