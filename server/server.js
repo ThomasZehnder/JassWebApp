@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var app = express();
 
 var table_a = require('./table_a');
+var table_empty = require('./table_empty');
 
 var models = [];
 
@@ -50,34 +51,34 @@ app.get('/test.txt', function (req, res) {
 // On localhost:3001/services/getnodeplay
 app.get('/services/getnodeplay', function (req, res) {
 
-    var tableName = 'a';
+    var tablename = 'a';
 
     //console.log("req: ",  req);
-    //console.log("query: ", typeof req.query.tableName, req.query);
-    if (req.query.tableName) {
-        tableName = req.query.tableName;
+    //console.log("query: ", typeof req.query.tablename, req.query);
+    if (req.query.tablename) {
+        tablename = req.query.tablename;
     }
 
-    if (typeof models[tableName] === 'undefined') {
-        models[tableName] = {};
+    if (typeof models[tablename] === 'undefined') {
+        models[tablename] = table_empty;
     }
 
-    res.status(200).send(models[tableName]);
+    res.status(200).send(models[tablename]);
 });
 
 // On localhost:3001/services/setnodeplay
 app.post('/services/setnodeplay', function (req, res) {
 
-    var tableName = 'a';
+    var tablename = 'a';
 
     console.log("req.body: ", req.body);
 
     var body = req.body;
-    var tableName = body.tableName;
-    models[tableName] = body.model;
-    console.log("written model: ", tableName);
+    var tablename = body.tablename;
+    models[tablename] = body.model;
+    console.log("written model: ", tablename);
 
-    res.status(200).send(models[tableName]);
+    res.status(200).send(models[tablename]);
 });
 
 // Change the 404 message modifying the middleware
