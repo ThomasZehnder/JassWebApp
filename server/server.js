@@ -11,11 +11,11 @@ var models = [];
 models['a'] = table_a;
 
 //Here we are configuring express to use body-parser as middle-ware.
-app.use( bodyParser.urlencoded({ extended: false }));
-app.use( bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //
-app.all('/services/*', function(req, res, next){
+app.all('/services/*', function (req, res, next) {
     console.log("services CORS + JSON", req.baseUrl);
     console.log(req.originalUrl) // /greet
     // Website you wish to allow to connect
@@ -83,12 +83,19 @@ app.post('/services/setnodeplay', function (req, res) {
 
 // Change the 404 message modifying the middleware
 app.use(function (req, res, next) {
-    res.status(404).send("not implemented URL :-(");
+    res.status(404).send(`not implemented URL :-( ${req.originalUrl} )`);
 });
 
 
 
 // start the server in the port 3001 !
-app.listen(3001, function () {
-    console.log('local developer jass server on port 3001.');
+port = null;
+process.argv.forEach((val, index) => {
+    console.log(`${index}: ${val}`)
+})
+const args = require('minimist')(process.argv.slice(2));
+port = args['port'];
+
+s = app.listen(port, function () {
+    console.log('local developer jass server on port %d', s.address().port);
 });

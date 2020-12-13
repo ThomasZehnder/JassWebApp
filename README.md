@@ -26,4 +26,4 @@ node_express_server NPM SCRIPT will start the web service server. If you build t
 # Build and deploy
 build_react builds the React UI files un the build folder. These folder is mounted as file folder inside the express server.
 
-The ftp deploy scripst trasfers the build folder to the jass.zhs.ch server.
+The ftp deploy scripts transfers the build folder to the jass.zhs.ch server.
