@@ -18,11 +18,12 @@ If you want to know more about the basic Jass Rules, check out this site: http:/
 
 # Setup developer environment
 ## React UI
-start_react_dev NPM SCRIPT will start server o port 3000. By default this environment will connect to localhost:3001 webservices.
-## Node test webservices
-node_express_server NPM SCRIPT will start the webservice server. If you build the application you can access also directly to localhost:3001 to see if the build Jass Web App works.
+start_react_dev NPM SCRIPT will start server o port 3000. By default this environment will connect to localhost:3001 web services.
+
+## Node test web services
+node_express_server NPM SCRIPT will start the web service server. If you build the application you can access also directly to localhost:3001 to see if the build Jass Web App works.
 
 # Build and deploy
-build_react builds the React UI files un the build folder. Thes folder is mounted as file folder inside the express server.
+build_react builds the React UI files un the build folder. These folder is mounted as file folder inside the express server.
 
 The ftp deploy scripst trasfers the build folder to the jass.zhs.ch server.
