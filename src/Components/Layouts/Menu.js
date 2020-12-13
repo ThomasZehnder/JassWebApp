@@ -26,7 +26,7 @@ export default ({ index, changePage }) => {
 
   return <Grid container spacing={2} style={{ background: 'lightgreen' }}>
     <Grid item xs align="center">
-      <Typography variant="body1">&copy; ZHS 2020 JassWebApp DEV V1.00<br></br>{Player.name}</Typography>
+      <Typography variant="body1">&copy; ZHS 2020 JassWebApp DEV V1.01<br></br>{Player.name}</Typography>
     </Grid>
     <Grid item xs={9}>
       <Tabs
@@ -37,7 +37,7 @@ export default ({ index, changePage }) => {
         variant="scrollable"
         scrollButtons="on"
       >
-        {/* map = loop over all arrayelements*/}
+        {/* map = loop over all array elements*/}
         {content.map(entry =>
           _showMenu(entry)
         )}

@@ -10,16 +10,18 @@ var models = [];
 models['a'] = table_a;
 
 //Here we are configuring express to use body-parser as middle-ware.
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use( bodyParser.urlencoded({ extended: false }));
+app.use( bodyParser.json());
 
-
-app.use(function (req, res, next) {
-    //console.log("CORS");
+//
+app.all('/services/*', function(req, res, next){
+    console.log("services CORS + JSON", req.baseUrl);
+    console.log(req.originalUrl) // /greet
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); // If needed
     res.setHeader('Access-Control-Allow-Headers', 'Access-Control-*, Origin, Content-Type, Accept'); // If needed
+
     res.setHeader('Content-type', 'application/json');
 
     //intercepts OPTIONS method
@@ -32,7 +34,6 @@ app.use(function (req, res, next) {
         //move on
         next();
     }
-
 });
 
 
@@ -41,46 +42,47 @@ app.use(express.static('./build'));
 
 
 // on the request to root (localhost:3001/)
-app.get('/test', function (req, res) {
+app.get('/test.txt', function (req, res) {
+    res.setHeader('Content-type', 'text/plain');
     res.status(200).send('jass development test server');
 });
 
 // On localhost:3001/services/getnodeplay
 app.get('/services/getnodeplay', function (req, res) {
 
-    var tablename = 'a';
+    var tableName = 'a';
 
     //console.log("req: ",  req);
-    //console.log("query: ", typeof req.query.tablename, req.query);
-    if (req.query.tablename) {
-        tablename = req.query.tablename;
+    //console.log("query: ", typeof req.query.tableName, req.query);
+    if (req.query.tableName) {
+        tableName = req.query.tableName;
     }
 
-    if (typeof models[tablename] === 'undefined') {
-        models[tablename] = {};
+    if (typeof models[tableName] === 'undefined') {
+        models[tableName] = {};
     }
 
-    res.status(200).send(models[tablename]);
+    res.status(200).send(models[tableName]);
 });
 
 // On localhost:3001/services/setnodeplay
 app.post('/services/setnodeplay', function (req, res) {
 
-    var tablename = 'a';
+    var tableName = 'a';
 
     console.log("req.body: ", req.body);
 
     var body = req.body;
-    var tablename = body.tablename;
-    models[tablename] = body.model;
-    console.log("writen model: ", tablename);
+    var tableName = body.tableName;
+    models[tableName] = body.model;
+    console.log("written model: ", tableName);
 
-    res.status(200).send(models[tablename]);
+    res.status(200).send(models[tableName]);
 });
 
-// Change the 404 message modifing the middleware
+// Change the 404 message modifying the middleware
 app.use(function (req, res, next) {
-    res.status(404).send("not implemented URL");
+    res.status(404).send("not implemented URL :-(");
 });
 
 

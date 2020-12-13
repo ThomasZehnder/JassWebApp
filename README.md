@@ -7,7 +7,9 @@ Designed to play together during corona time. The rules are not implemented, so 
 
 Unique game in the world counter clockwise.
 
-All text are in swiis german dialect region St.Gallen :-)
+All text are in swiss german dialect region St.Gallen :-)
+
+If you want to know more about the basic Jass Rules, check out this site: http://www.jassinfo.ch/f_jassregeln.html
 
 # How to start the game:
 ## Supervisor Page

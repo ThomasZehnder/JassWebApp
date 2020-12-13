@@ -305,7 +305,7 @@ Jass.playNewRound = function () {
     //Spieler freigeben, welcher die Runde zurückgesetzt hat
     Model.players[Player.indexInModel].isPlaying = true;
     if (Player.name === "Laura") {
-        Model.table.playAction = Player.name + " hät d'Runde gwunne und isch in New Zealand, Queenstown"
+        Model.table.playAction = Player.name + " hät d'Runde gwunne und isch in nümer in New Zealand, Queenstown"
     } else {
         Model.table.playAction = Player.name + " hät d'Runde gwunne und isch am Zug"
     }

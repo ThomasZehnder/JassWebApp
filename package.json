@@ -24,8 +24,10 @@
     "test": "react-scripts test --env=jsdom",
     "push_git": "git push --set-upstream https://github.com/ThomasZehnder/JassWebApp.git master",
     "node_express_server": "node server/server.js",
-    "ftpToZhs_productive_ATTENTION": "node zhs_infos/deploy_remove_postfix",
-    "ftpToZhs_development": "node zhs_infos/deploy_dev"
+    "ftpToZhs_development": "node zhs_infos/deploy_dev", 
+    "---":"trennung",
+    "ftpToZhs_productive_ATTENTION": "xx (entferne xx wenn productiv) node zhs_infos/deploy_remove_postfix"
+    
   },
   "browserslist": {
     "production": [

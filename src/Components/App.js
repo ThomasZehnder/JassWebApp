@@ -10,7 +10,7 @@ export default class extends Component {
 
   handlePageSelected = index => {
 
-    //console.log ("Handle Pagechange",index)
+    //console.log ("Handle Page Change",index)
     this.setState({ index: index })
 
   }
