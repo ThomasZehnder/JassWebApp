@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //
-app.all('/services/*', function (req, res, next) {
+app.all(process.env.PASSENGER_BASE_URI+'/services/*', function (req, res, next) {
     console.log("services CORS + JSON", req.baseUrl);
     console.log(req.originalUrl) // /greet
     // Website you wish to allow to connect
