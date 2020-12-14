@@ -51,9 +51,11 @@ export default class Supervisor extends React.Component {
         <Typography color="textSecondary" variant="body2">
           Angabe von Name und Position direkt in der URL. Dadurch kann ohne eingabe nch refresh der Seite gleich weiter gespielt werden. <br></br>
           <br />
-            TIP: http://jass.zhs.ch/?devmode=on&amp;table=b&amp;player=Thomas&amp;position=1 (position [1..4])
+            TIP: http://jass-demo.zhs.ch/?devmode=on&amp;table=b&amp;player=Thomas&amp;position=1 (position [1..4])
             <br />
-            Für Entwickler: http://localhost:3000/?devmode=on oder Option usezhsservices für Test der ZHS Webservices
+            For Developper: http://localhost:3000/?devmode=on 
+            <br />
+            Option usezhsservices=true to use localhost webservice running on port 3001.
             <br />
         </Typography>
       </Paper>

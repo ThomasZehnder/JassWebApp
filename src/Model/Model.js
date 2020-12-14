@@ -71,18 +71,14 @@ if ((window.location.host === zhsAdress) || (params.get('usezhsservices'))) {
     console.log("Use ZHS Jass Dev Services on Port 80");
     getPlayUrl = zhsAdress + './dev/services/getplay.php'
     setPlayUrl = zhsAdress + './dev/services/setplay.php'
-} else if (window.location.host === 'zhs.ch') {
-    console.log("Start Node Webserver zhs.ch/node-test-js");
-    getPlayUrl = './services/getnodeplay';
-    setPlayUrl = './services/setnodeplay';
-} else if (window.location.host === 'jass2.zhs.ch') {
-        console.log("Start Node Webserver zhs.ch/node-test-js");
-        getPlayUrl = '//zhs.ch/node-js-test/services/getnodeplay';
-        setPlayUrl = '//zhs.ch/node-js-test/services/setnodeplay';
-} else {
+} else if (window.location.host === 'localhost') {
     console.log("Start Node Webserver on Port 3001");
     getPlayUrl = '//localhost:3001/services/getnodeplay';
     setPlayUrl = '//localhost:3001/services/setnodeplay';
+} else {
+    console.log("Start Node Webserver zhs.ch/node-test-js");
+    getPlayUrl = '//zhs.ch/node-js-test/services/getnodeplay';
+    setPlayUrl = '//zhs.ch/node-js-test/services/setnodeplay';
 }
 
 //https://www.w3resource.com/javascript-exercises/javascript-math-exercise-23.php
