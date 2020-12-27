@@ -55,7 +55,7 @@ export default class Supervisor extends React.Component {
             <br />
             For Developper: http://localhost:3000/?devmode=on 
             <br />
-            Option usezhsservices=true to use localhost webservice running on port 3001.
+            Option uselocalwebservicess=true to use localhost webservice running on port 3001.
             <br />
         </Typography>
       </Paper>

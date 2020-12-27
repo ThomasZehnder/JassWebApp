@@ -61,17 +61,18 @@ if (table !== null) {
 };
 
 console.log("host: ", window.location.host);
-console.log("usezhsservices: ", params.get('usezhsservices'));
-var zhsAdress = "//jass.zhs.ch/";
+console.log("uselocalwebservicess: ", params.get('uselocalwebservicess'));
+
 
 var getPlayUrl = '';
 var setPlayUrl = '';
 
-if ((window.location.host === zhsAdress) || (params.get('usezhsservices'))) {
-    console.log("Use ZHS Jass Dev Services on Port 80");
-    getPlayUrl = zhsAdress + './dev/services/getplay.php'
-    setPlayUrl = zhsAdress + './dev/services/setplay.php'
-} else if (window.location.host === 'localhost') {
+if (window.location.host === "jass.zhs.ch") {
+    console.log("Use ZHS Jass Dev Services PHP");
+    getPlayUrl = "//jass.zhs.ch/dev/services/getplay.php";
+    setPlayUrl = "//jass.zhs.ch/dev/services/setplay.php";
+} else if ((window.location.host.startsWith('localhost'))|| (params.get('uselocalwebservicess')))
+{
     console.log("Start Node Webserver on Port 3001");
     getPlayUrl = '//localhost:3001/services/getnodeplay';
     setPlayUrl = '//localhost:3001/services/setnodeplay';

@@ -1,4 +1,8 @@
-// Require express and create an instance of it
+// Server to deliver web-app and provide webservice
+
+//use: node server --port 3001
+
+
 const path = require('path');
 var express = require('express');
 var bodyParser = require("body-parser");
@@ -102,6 +106,8 @@ process.argv.forEach((val, index) => {
 })
 const args = require('minimist')(process.argv.slice(2));
 port = args['port'];
+console.log(args);
+console.log(port);
 
 s = app.listen(port, function () {
     console.log('local developer jass server on port %d', s.address().port);
