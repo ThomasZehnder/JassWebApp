@@ -10,17 +10,16 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 
 
 import { Player } from '../../Model/Model'
 
 const tables = [
-  { name: "Diaz", text: "Mexico and USA", icon: "Image" },
-  { name: "Zehnder", text: "mit Stefan in Deutschland", icon: "Work" },
-  { name: "Steiger", text: "Agi, Bruno, Erika & Thomas", icon: "BeachAccess" }
+  { name: "Diaz", text: "Mexico and USA", icon: "Diaz" },
+  { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "Harbich" },
+  { name: "Stefan", text: "mit Stefan in Deutschland", icon: "Stefan" },
+  { name: "Steinemann", text: "mit Brigitte und Urs", icon: "Steinemann" },
+  { name: "Steiger", text: "mit Agi und Bruno", icon: "Steiger" }
 ];
 
 const styles = {
@@ -71,42 +70,17 @@ export default class StartScreen extends React.Component {
         </Grid>
         <Grid item xs={6}>
           <Paper style={styles.localPaper}>xs=6
-          <Icon>star</Icon>
+          <Avatar alt="Diaz" src="/avantar/diaz.jpg" />
           </Paper>
         </Grid>
       </Grid>
 
       <List style={styles.localList}>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <ImageIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-        </ListItem>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <WorkIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Work" secondary="Jan 7, 2014" />
-        </ListItem>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <BeachAccessIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Vacation" secondary="July 20, 2014" />
-        </ListItem>
+
         {tables.map((element) =>
           <ListItem key={element.name}>
             <ListItemAvatar>
-              <Avatar>
-                {/*image here*/}
-              </Avatar>
+            <Avatar alt={element.name} src={"/avantar/"+element.icon+".jpg"} />
             </ListItemAvatar>
             <ListItemText primary={element.name} secondary={element.text} />
           </ListItem>
