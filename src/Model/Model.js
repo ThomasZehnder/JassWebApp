@@ -18,7 +18,7 @@ export var Model = {
 }
 
 export var Player = {
-    tableName: "a",
+    tableName: "-",
     guid: create_UUID(),
     name: "",
     indexInModel: 0,
