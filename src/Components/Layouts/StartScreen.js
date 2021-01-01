@@ -77,7 +77,7 @@ export default class StartScreen extends React.Component {
         <Grid item xs={12}>
           <Paper style={styles.localPaper}>
             <Typography variant="body1" >
-              Jass APP <br /> Bitte zuerst Tisch wählen:
+               Bitte Tisch wählen:
             </Typography>
           </Paper>
         </Grid>

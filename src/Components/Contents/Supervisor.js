@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import {
   Paper,
   Typography,
@@ -6,6 +8,7 @@ import {
   Grid
 } from '@material-ui/core';
 
+import { StartScreen } from '../Layouts'
 
 import { SetPlayerNames } from './Widgets';
 import { SetPlayVariant } from './Widgets';
@@ -53,11 +56,20 @@ export default class Supervisor extends React.Component {
           <br />
             TIP: http://jass-demo.zhs.ch/?devmode=on&amp;table=b&amp;player=Thomas&amp;position=1 (position [1..4])
             <br />
-            For Developper: http://localhost:3000/?devmode=on 
+            For Developper: http://localhost:3000/?devmode=on
             <br />
             Option uselocalwebservicess=true to use localhost webservice running on port 3001.
             <br />
         </Typography>
+      </Paper>
+      <Paper style={styles.PaperParagraph}>
+        <Fragment>
+          <Router>
+            <Fragment>
+              <Route path="/" component={StartScreen} />
+            </Fragment>
+          </Router>
+        </Fragment>
       </Paper>
 
       {(Player.devMode) ? (
