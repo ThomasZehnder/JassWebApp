@@ -3,7 +3,8 @@ import {
   Typography,
   Tabs,
   Tab,
-  Grid
+  Grid,
+  Avatar
 } from '@material-ui/core'
 
 import { content } from './Content'
@@ -26,7 +27,12 @@ export default ({ index, changePage }) => {
 
   return <Grid container spacing={2} style={{ background: 'lightgreen' }}>
     <Grid item xs align="center">
-      <Typography variant="body1">&copy; ZHS 2020 JassWebApp DEV V1.01<br></br>{Player.name}</Typography>
+    <Avatar alt={Player.tableName} src={"/avantar/" + Player.tableName + ".jpg"} />
+    <Typography variant="body1">{Player.name}</Typography>
+   </Grid>
+
+    <Grid item xs align="center">
+      <Typography variant="body1">&copy; ZHS 2020 JassWebApp V1.02</Typography>
     </Grid>
     <Grid item xs={9}>
       <Tabs
