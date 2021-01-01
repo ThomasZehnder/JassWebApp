@@ -17,8 +17,7 @@ import { Webservice, Player } from '../../Model/Model'
 
 
 const startTables = [
-  { name: "Start", text: "Start Table for Tests only", icon: "Start" },
-  { name: "Steiger", text: "mit Agi und Bruno", icon: "Steiger" }
+  { name: "Start", text: "Start Table for Tests only. In case you see this, webservice is not running on serverside.", icon: "Start" },
 ];
 
 const styles = {

@@ -11,9 +11,17 @@ var app = express();
 var table_a = require('./server/table_a');
 var table_empty = require('./server/table_empty');
 
-var models = [];
+const tables = [
+    { name: "Diaz", text: "Mexico and USA", icon: "Diaz" },
+    { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "Harbich" },
+    { name: "Stefan", text: "mit Stefan in Deutschland", icon: "Stefan" },
+    { name: "Steinemann", text: "mit Brigitte und Urs", icon: "Steinemann" },
+    { name: "Steiger", text: "mit Agi und Bruno", icon: "Steiger" }
+  ];
 
-models['a'] = table_a;
+var Models = [];
+
+Models['a'] = table_a;
 
 if (typeof(process.env.PASSENGER_BASE_URI)==='undefined'){
     process.env.PASSENGER_BASE_URI = '';
@@ -47,7 +55,6 @@ app.all(process.env.PASSENGER_BASE_URI+'/services/*', function (req, res, next) 
     }
 });
 
-
 // Mount build folder
 const buildPath = path.join(__dirname, '/build');
 app.use(process.env.PASSENGER_BASE_URI, express.static(buildPath));
@@ -59,19 +66,34 @@ app.get(process.env.PASSENGER_BASE_URI+'/test.txt', function (req, res) {
     res.status(200).send('jass development test server');
 });
 
-const tables = [
-    { name: "Diaz", text: "Mexico and USA", icon: "Diaz" },
-    { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "Harbich" },
-    { name: "Stefan", text: "mit Stefan in Deutschland", icon: "Stefan" },
-    { name: "Steinemann", text: "mit Brigitte und Urs", icon: "Steinemann" },
-    { name: "Steiger", text: "mit Agi und Bruno", icon: "Steiger" }
-  ];
+
 // On localhost:3001/services/gettablelist
 app.get(process.env.PASSENGER_BASE_URI+'/services/gettablelist', function (req, res) {
+    
+    //Append registred names of tables
+    var tablesWithNames = [];
+    tables.forEach ((table, index) => {
 
+        tablesWithNames[index] = JSON.parse(JSON.stringify(table));;
 
-    res.status(200).send(tables);
+        if (typeof Models[table.name] != 'undefined') {
+            var model = JSON.parse(Models[table.name]);
+            console.log(model);
+            tablesWithNames[index].text += " [ Spieler: ";
+            model.players.forEach((player, playerNumber) => {
+                if (playerNumber>0) {
+                    tablesWithNames[index].text += ", ";
+                }
+                tablesWithNames[index].text += player.name;
+            });
+            tablesWithNames[index].text += " ]"
+        };
+    });
+    
+    
+    res.status(200).send(tablesWithNames);
 });
+
 // On localhost:3001/services/getnodeplay
 app.get(process.env.PASSENGER_BASE_URI+'/services/getnodeplay', function (req, res) {
 
@@ -83,11 +105,11 @@ app.get(process.env.PASSENGER_BASE_URI+'/services/getnodeplay', function (req, r
         tablename = req.query.tablename;
     }
 
-    if (typeof models[tablename] === 'undefined') {
-        models[tablename] = table_empty;
+    if (typeof Models[tablename] === 'undefined') {
+        Models[tablename] = table_empty;
     }
 
-    res.status(200).send(models[tablename]);
+    res.status(200).send(Models[tablename]);
 });
 
 // On localhost:3001/services/setnodeplay
@@ -99,10 +121,10 @@ app.post(process.env.PASSENGER_BASE_URI+'/services/setnodeplay', function (req, 
 
     var body = req.body;
     var tablename = body.tablename;
-    models[tablename] = body.model;
+    Models[tablename] = body.model;
     console.log("written model: ", tablename);
 
-    res.status(200).send(models[tablename]);
+    res.status(200).send(Models[tablename]);
 });
 
 // Change the 404 message modifying the middleware
