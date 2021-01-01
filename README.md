@@ -7,14 +7,15 @@ Designed to play together during corona time. The rules are not implemented, so 
 
 Unique game in the world counter clockwise.
 
-All text are in swiss german dialect region St.Gallen :-)
+All text are in Swiss German dialect region St.Gallen :-)
 
-If you want to know more about the basic Jass Rules, check out this site: http://www.jassinfo.ch/f_jassregeln.html
+If you want to know more about the basic Jass Rules, check out this site: http://www.jassinfo.ch/f_jassregeln.html (sorry only in German)
 
 # How to start the game:
 ## Supervisor Page
 * Use this page to define the names of players
-* Choose basic rules
+* Choose basic play rules
+* Change table name if neccesary. 
 
 # Setup developer environment
 ## React UI
