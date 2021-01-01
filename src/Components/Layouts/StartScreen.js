@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import {
   Paper,
   Typography,
   Grid
-} from '@material-ui/core'
+} from '@material-ui/core';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -35,6 +35,15 @@ const styles = {
   },
 }
 
+function setParams({ table = "" }) {
+  const searchParams = new URLSearchParams();
+  searchParams.set("table", table);
+  return searchParams.toString();
+}
+
+function refreshPage() {
+  window.location.reload();
+}
 
 export default class StartScreen extends React.Component {
 
@@ -43,50 +52,53 @@ export default class StartScreen extends React.Component {
     this.state = {
       tableName: Player.tableName
     };
-  };
-
-  updatePage() {
-    console.log("Update StartScreen Page, cards length: ", Player.tableName);
 
   };
 
-  componentDidMount() {
-    console.log("Debug did mount: Call load getModel WS", Player.tableName);
-  };
 
-  componentWillUnmount() {
-    console.log("Debug did WillUnmount");
-  };
+  _selectTable = (table) => {
+    console.log(" _selectTable: ", table);
 
+    Player.tableName = table.name;
+    this.setState({ tableName: Player.tableName });
+
+    const url = setParams({ table: Player.tableName });
+    //do not forget the "?" !
+    this.props.history.push(`?${url}`);
+
+    refreshPage();
+  }
 
 
   render() {
 
     return <Paper style={styles.localPaper}>
+
       <Grid container spacing={2}>
 
-        <Grid item xs={6}>
-          <Paper style={styles.localPaper}><Typography variant="body1" >Jass APP: Bitte zuerst Tisch wählen:  </Typography></Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper style={styles.localPaper}>xs=6
-          <Avatar alt="Diaz" src="/avantar/diaz.jpg" />
+        <Grid item xs={12}>
+          <Paper style={styles.localPaper}>
+            <Typography variant="body1" >
+              Jass APP <br /> Bitte zuerst Tisch wählen:
+            </Typography>
           </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <List style={styles.localList}>
+
+            {tables.map((element) =>
+              <ListItem button key={element.name} onClick={() => this._selectTable(element)}>
+                <ListItemAvatar>
+                  <Avatar alt={element.name} src={"/avantar/" + element.icon + ".jpg"} />
+                </ListItemAvatar>
+                <ListItemText primary={element.name} secondary={element.text} />
+              </ListItem>
+            )}
+          </List>
         </Grid>
       </Grid>
 
-      <List style={styles.localList}>
 
-        {tables.map((element) =>
-          <ListItem key={element.name}>
-            <ListItemAvatar>
-            <Avatar alt={element.name} src={"/avantar/"+element.icon+".jpg"} />
-            </ListItemAvatar>
-            <ListItemText primary={element.name} secondary={element.text} />
-          </ListItem>
-
-        )}
-      </List>
 
     </Paper>
 

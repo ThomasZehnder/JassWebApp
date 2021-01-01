@@ -1,5 +1,10 @@
 import React, { Component, Fragment } from 'react'
-import {Menu, Content, Footer, StartScreen } from './Layouts'
+
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+
+import { Menu, Content, Footer, StartScreen } from './Layouts'
 
 
 // Import the Model
@@ -24,7 +29,13 @@ export default class extends Component {
     const { index } = this.state;
 
     if (Player.tableName === "-") {
-      return <StartScreen />
+      return <Fragment>
+        <Router>
+          <Fragment>
+            <Route path="/" component={StartScreen} />
+          </Fragment>
+        </Router>
+      </Fragment>
     }
 
     return <Fragment>
