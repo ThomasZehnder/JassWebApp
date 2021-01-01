@@ -59,6 +59,19 @@ app.get(process.env.PASSENGER_BASE_URI+'/test.txt', function (req, res) {
     res.status(200).send('jass development test server');
 });
 
+const tables = [
+    { name: "Diaz", text: "Mexico and USA", icon: "Diaz" },
+    { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "Harbich" },
+    { name: "Stefan", text: "mit Stefan in Deutschland", icon: "Stefan" },
+    { name: "Steinemann", text: "mit Brigitte und Urs", icon: "Steinemann" },
+    { name: "Steiger", text: "mit Agi und Bruno", icon: "Steiger" }
+  ];
+// On localhost:3001/services/gettablelist
+app.get(process.env.PASSENGER_BASE_URI+'/services/gettablelist', function (req, res) {
+
+
+    res.status(200).send(tables);
+});
 // On localhost:3001/services/getnodeplay
 app.get(process.env.PASSENGER_BASE_URI+'/services/getnodeplay', function (req, res) {
 

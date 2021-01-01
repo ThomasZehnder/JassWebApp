@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import {
   Paper,
   Typography,
@@ -10,13 +12,12 @@ import {
   Avatar
 } from '@material-ui/core';
 
-import { Player } from '../../Model/Model'
+// Import the Model
+import { Webservice, Player } from '../../Model/Model'
 
-const tables = [
-  { name: "Diaz", text: "Mexico and USA", icon: "Diaz" },
-  { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "Harbich" },
-  { name: "Stefan", text: "mit Stefan in Deutschland", icon: "Stefan" },
-  { name: "Steinemann", text: "mit Brigitte und Urs", icon: "Steinemann" },
+
+const startTables = [
+  { name: "Start", text: "Start Table for Tests only", icon: "Start" },
   { name: "Steiger", text: "mit Agi und Bruno", icon: "Steiger" }
 ];
 
@@ -48,11 +49,20 @@ export default class StartScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tableName: Player.tableName
+      tableName: Player.tableName,
+      tables : startTables
     };
 
   };
 
+  componentDidMount() {
+    axios.get(Webservice.getTable.url)
+      .then(res => {
+        const tables = res.data;
+        console.log(tables);
+        this.setState({ tables: tables });
+      })
+  }
 
   _selectTable = (table) => {
     console.log(" _selectTable: ", table);
@@ -84,7 +94,7 @@ export default class StartScreen extends React.Component {
         <Grid item xs={12}>
           <List style={styles.localList}>
 
-            {tables.map((element) =>
+            {this.state.tables.map((element) =>
               <ListItem button key={element.name} onClick={() => this._selectTable(element)}>
                 <ListItemAvatar>
                   <Avatar alt={element.name} src={"/avantar/" + element.icon + ".jpg"} />

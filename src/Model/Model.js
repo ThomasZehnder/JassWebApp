@@ -43,6 +43,9 @@ export var Webservice = {
     setPlay: {
         func: null,
         status: "wait on first call"
+    },
+    getTable:{
+        url: "https://jsonplaceholder.typicode.com/users"
     }
 }
 
@@ -69,15 +72,18 @@ var setPlayUrl = '';
 
 if (window.location.host === "jass.zhs.ch") {
     console.log("Use ZHS Jass Dev Services PHP");
+    Webservice.getTable.url = '//jass.zhs.ch/dev/services/gettablelist';
     getPlayUrl = "//jass.zhs.ch/dev/services/getplay.php";
     setPlayUrl = "//jass.zhs.ch/dev/services/setplay.php";
 } else if ((window.location.host.startsWith('localhost'))|| (params.get('uselocalwebservicess')))
 {
     console.log("Start Node Webserver on Port 3001");
+    Webservice.getTable.url = '//localhost:3001/services/gettablelist';
     getPlayUrl = '//localhost:3001/services/getnodeplay';
     setPlayUrl = '//localhost:3001/services/setnodeplay';
 } else {
     console.log("Start Node Webserver zhs.ch/node-test-js");
+    Webservice.getTable.url = '//zhs.ch/node-js-test/gettablelist';
     getPlayUrl = '//zhs.ch/node-js-test/services/getnodeplay';
     setPlayUrl = '//zhs.ch/node-js-test/services/setnodeplay';
 }
