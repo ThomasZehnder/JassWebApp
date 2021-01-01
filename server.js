@@ -78,7 +78,7 @@ app.get(process.env.PASSENGER_BASE_URI+'/services/gettablelist', function (req, 
 
         if (typeof Models[table.name] != 'undefined') {
             var model = JSON.parse(Models[table.name]);
-            console.log(model);
+            //console.log(model);
             tablesWithNames[index].text += " [ Spieler: ";
             model.players.forEach((player, playerNumber) => {
                 if (playerNumber>0) {
