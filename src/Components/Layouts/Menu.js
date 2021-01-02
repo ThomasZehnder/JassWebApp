@@ -32,7 +32,7 @@ export default ({ index, changePage }) => {
    </Grid>
 
     <Grid item xs align="center">
-      <Typography variant="body1">&copy; ZHS 2020 JassWebApp V1.02</Typography>
+      <Typography variant="body1">&copy; ZHS 2021 JassWebApp V1.03</Typography>
     </Grid>
     <Grid item xs={9}>
       <Tabs

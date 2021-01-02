@@ -31,7 +31,7 @@ export default class PlayCommands extends React.Component {
             <Fragment >
                 <Paper style={{ padding: 10 }}>
                     <Typography variant="h6" >
-                        {Player.name === "" ? ("Bitte unter Start zuerst dich anmelden mit Namen :-)") : (<div>Ich bi {Player.name}</div>)}
+                        {Player.name === "" ? ("Bitte unter Start zuerst dich anmelden mit Namen :-)") : (<div>Min Name isch {Player.name}</div>)}
                         Es isch: {this.props.webclientDate.toLocaleTimeString()} {"und gwählt isch "} 
                         <img src={"img/" + Model.status.playMode + ".png"} title={Model.status.playMode} alt={Model.status.playMode} heigth="50"></img>
                     </Typography>
