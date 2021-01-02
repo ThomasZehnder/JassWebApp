@@ -27,7 +27,7 @@ export default ({ index, changePage }) => {
 
   return <Grid container spacing={2} style={{ background: 'lightgreen' }}>
     <Grid item xs align="center">
-    <Avatar alt={Player.tableName} src={"/avantar/" + Player.tableName + ".jpg"} />
+    <Avatar alt={Player.tableName} src={"avatar/" + Player.tableName + ".jpg"} />
     <Typography variant="body1">{Player.name}</Typography>
    </Grid>
 

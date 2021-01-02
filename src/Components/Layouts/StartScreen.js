@@ -66,7 +66,7 @@ export default class StartScreen extends React.Component {
   _selectTable = (table) => {
     console.log(" _selectTable: ", table);
 
-    Player.tableName = table.name;
+    Player.tableName = table.icon;  //use icon name, because capital are small to match with icon in menu
     this.setState({ tableName: Player.tableName });
 
     const url = setParams({ table: Player.tableName });
