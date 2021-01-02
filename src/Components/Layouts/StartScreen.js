@@ -17,7 +17,7 @@ import { Webservice, Player } from '../../Model/Model'
 
 
 const startTables = [
-  { name: "Start", text: "Start Table for Tests only. In case you see this, webservice is not running on serverside.", icon: "Start" },
+  { name: "Start", text: "Start Table for Tests only. In case you see this, webservice is not running on serverside.", icon: "start" },
 ];
 
 const styles = {
@@ -96,7 +96,7 @@ export default class StartScreen extends React.Component {
             {this.state.tables.map((element) =>
               <ListItem button key={element.name} onClick={() => this._selectTable(element)}>
                 <ListItemAvatar>
-                  <Avatar alt={element.name} src={"/avantar/" + element.icon + ".jpg"} />
+                  <Avatar alt={element.name} src={"avatar/" + element.icon + ".jpg"} />
                 </ListItemAvatar>
                 <ListItemText primary={element.name} secondary={element.text} />
               </ListItem>

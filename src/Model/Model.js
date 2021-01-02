@@ -45,7 +45,7 @@ export var Webservice = {
         status: "wait on first call"
     },
     getTable:{
-        url: "https://jsonplaceholder.typicode.com/users"
+        url: ""
     }
 }
 
@@ -83,7 +83,7 @@ if (window.location.host === "jass.zhs.ch") {
     setPlayUrl = '//localhost:3001/services/setnodeplay';
 } else {
     console.log("Start Node Webserver zhs.ch/node-test-js");
-    Webservice.getTable.url = '//zhs.ch/node-js-test/gettablelist';
+    Webservice.getTable.url = '//zhs.ch/node-js-test/services/gettablelist';
     getPlayUrl = '//zhs.ch/node-js-test/services/getnodeplay';
     setPlayUrl = '//zhs.ch/node-js-test/services/setnodeplay';
 }

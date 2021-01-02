@@ -12,11 +12,11 @@ var table_a = require('./server/table_a');
 var table_empty = require('./server/table_empty');
 
 const tables = [
-    { name: "Diaz", text: "Mexico and USA", icon: "Diaz" },
-    { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "Harbich" },
-    { name: "Stefan", text: "mit Stefan in Deutschland", icon: "Stefan" },
-    { name: "Steinemann", text: "mit Brigitte und Urs", icon: "Steinemann" },
-    { name: "Steiger", text: "mit Agi und Bruno", icon: "Steiger" }
+    { name: "Diaz", text: "Mexico and USA", icon: "diaz" },
+    { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "harbich" },
+    { name: "Stefan", text: "mit Stefan in Deutschland", icon: "stefan" },
+    { name: "Steinemann", text: "mit Brigitte und Urs", icon: "steinemann" },
+    { name: "Steiger", text: "mit Agi und Bruno", icon: "steiger" }
   ];
 
 var Models = [];
