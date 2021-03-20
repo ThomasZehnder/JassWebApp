@@ -15,12 +15,12 @@ var table_a = require('./server/table_a');
 var table_empty = require('./server/table_empty');
 
 const tables = [
-    { name: "Diaz", text: "Mexico and USA", icon: "diaz" },
-    { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "harbich" },
-    { name: "Stefan", text: "mit Stefan in Deutschland", icon: "stefan" },
-    { name: "Gallo", text: "mit Babs, Hampi, Jasmine und Dennis", icon: "gallo" },
-    { name: "Steinemann", text: "mit Brigitte und Urs", icon: "steinemann" },
-    { name: "Steiger", text: "mit Agi und Bruno", icon: "steiger" }
+    { name: "Diaz", text: "Mexico and USA", icon: "diaz" , players:["Elisabeth", "Maggy", "Valery", "Miguel"]},
+    { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "harbich", players:["Elisabeth", "Erika", "Thomas", "Matha"]},
+    { name: "Stefan", text: "mit Stefan in Deutschland", icon: "stefan", players:["Elisabeth", "Stefan", "Erika", "Thomas"] },
+    { name: "Gallo", text: "USA und Schweiz", icon: "gallo", players:["Babs", "Hampi", "Jasmine", "Dennis"] },
+    { name: "Steinemann", text: "Rossrüti", icon: "steinemann", players:["Brigitte", "Urs", "Erika", "Thomas"] },
+    { name: "Steiger", text: "Neualtwil", icon: "steiger", players:["Agi", "Bruno", "Erika", "Thomas"] }
   ];
 
 var Models = [];
@@ -78,8 +78,9 @@ app.get(process.env.PASSENGER_BASE_URI+'/services/gettablelist', function (req, 
     var tablesWithNames = [];
     tables.forEach ((table, index) => {
 
-        tablesWithNames[index] = JSON.parse(JSON.stringify(table));;
+        tablesWithNames[index] = JSON.parse(JSON.stringify(table)); //make a copy trick, otherwise it works with pointers
 
+        //get names if the exists in files/memory
         if (typeof Models[table.icon] != 'undefined') {
             var model = JSON.parse(Models[table.icon]);
             //console.log(model);
@@ -89,6 +90,16 @@ app.get(process.env.PASSENGER_BASE_URI+'/services/gettablelist', function (req, 
                     tablesWithNames[index].text += ", ";
                 }
                 tablesWithNames[index].text += player.name;
+            });
+            tablesWithNames[index].text += " ]"
+        } else {
+            //console.log(tables[index].players);
+            tablesWithNames[index].text += " [ Spieler: ";
+            tables[index].players.forEach((playerName, playerNumber) => {
+                if (playerNumber>0) {
+                    tablesWithNames[index].text += ", ";
+                }
+                tablesWithNames[index].text += playerName;
             });
             tablesWithNames[index].text += " ]"
         };
