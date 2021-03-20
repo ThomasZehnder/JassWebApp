@@ -18,6 +18,7 @@ const tables = [
     { name: "Diaz", text: "Mexico and USA", icon: "diaz" },
     { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "harbich" },
     { name: "Stefan", text: "mit Stefan in Deutschland", icon: "stefan" },
+    { name: "Gallo", text: "mit Babs, Hampi, Jasmine und Dennis", icon: "gallo" },
     { name: "Steinemann", text: "mit Brigitte und Urs", icon: "steinemann" },
     { name: "Steiger", text: "mit Agi und Bruno", icon: "steiger" }
   ];
