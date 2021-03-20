@@ -47,20 +47,29 @@ export default class Supervisor extends React.Component {
     return <Paper style={styles.FixPaper}>
 
       <SetPlayerNames />
-      <SetPlayVariant />
 
       <Paper style={styles.PaperParagraph}>
 
-        <Typography color="textSecondary" variant="body2">
-          Angabe von Name und Position direkt in der URL. Dadurch kann ohne eingabe nch refresh der Seite gleich weiter gespielt werden. <br></br>
-          <br />
-            TIP: http://jass-demo.zhs.ch/?devmode=on&amp;table=b&amp;player=Thomas&amp;position=1 (position [1..4])
+
+        <Grid container alignItems="center">
+          <Grid item xs='4'>
+            <SetPlayVariant />
+          </Grid>
+          <Grid item xs='8'>
+            <Paper style={styles.PaperParagraph}>
+              <Typography color="textSecondary" variant="body2">
+                TIP: Angabe von Name und Position direkt in der URL. Dadurch kann ohne Eingabe nach refresh der Seite gleich weiter gespielt werden. <br></br>
+                <br />
+            z.B. http://jass-demo.zhs.ch/?devmode=on&amp;table=b&amp;player=Thomas&amp;position=1 (position [1..4])
             <br />
             For Developper: http://localhost:3000/?devmode=on
             <br />
             Option uselocalwebservicess=true to use localhost webservice running on port 3001.
             <br />
-        </Typography>
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
       </Paper>
       <Paper style={styles.PaperParagraph}>
         <Fragment>
