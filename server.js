@@ -15,19 +15,19 @@ var table_a = require('./server/table_a');
 var table_empty = require('./server/table_empty');
 
 const tables = [
-    { name: "Diaz", text: "Mexico and USA", icon: "diaz" , players:["Elisabeth", "Maggy", "Valery", "Miguel"]},
-    { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "harbich", players:["Elisabeth", "Erika", "Thomas", "Matha"]},
-    { name: "Stefan", text: "mit Stefan in Deutschland", icon: "stefan", players:["Elisabeth", "Stefan", "Erika", "Thomas"] },
-    { name: "Gallo", text: "USA und Schweiz", icon: "gallo", players:["Babs", "Hampi", "Jasmine", "Dennis"] },
-    { name: "Steinemann", text: "Rossrüti", icon: "steinemann", players:["Brigitte", "Urs", "Erika", "Thomas"] },
-    { name: "Steiger", text: "Neualtwil", icon: "steiger", players:["Agi", "Bruno", "Erika", "Thomas"] }
-  ];
+    { name: "Diaz", text: "Mexico and USA", icon: "diaz", players: ["Elisabeth", "Maggy", "Valery", "Miguel"] },
+    { name: "Harbich", text: "mit Elisabeth in Mexico", icon: "harbich", players: ["Elisabeth", "Erika", "Thomas", "Matha"] },
+    { name: "Stefan", text: "mit Stefan in Deutschland", icon: "stefan", players: ["Elisabeth", "Stefan", "Erika", "Thomas"] },
+    { name: "Gallo", text: "USA und Schweiz", icon: "gallo", players: ["Babs", "Hampi", "Jasmine", "Dennis"] },
+    { name: "Steinemann", text: "Rossrüti", icon: "steinemann", players: ["Brigitte", "Urs", "Erika", "Thomas"] },
+    { name: "Steiger", text: "Neualtwil", icon: "steiger", players: ["Agi", "Bruno", "Erika", "Thomas"] }
+];
 
 var Models = [];
 
 Models['a'] = table_a;
 
-if (typeof(process.env.PASSENGER_BASE_URI)==='undefined'){
+if (typeof (process.env.PASSENGER_BASE_URI) === 'undefined') {
     process.env.PASSENGER_BASE_URI = '';
 }
 console.log("process.env.PASSENGER_BASE_URI: ", process.env.PASSENGER_BASE_URI);
@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //
-app.all(process.env.PASSENGER_BASE_URI+'/services/*', function (req, res, next) {
+app.all(process.env.PASSENGER_BASE_URI + '/services/*', function (req, res, next) {
     console.log("services CORS + JSON", req.baseUrl);
     console.log(req.originalUrl) // /greet
     // Website you wish to allow to connect
@@ -65,28 +65,28 @@ app.use(process.env.PASSENGER_BASE_URI, express.static(buildPath));
 
 
 // on the request to root (localhost:3001/)
-app.get(process.env.PASSENGER_BASE_URI+'/test.txt', function (req, res) {
+app.get(process.env.PASSENGER_BASE_URI + '/test.txt', function (req, res) {
     res.setHeader('Content-type', 'text/plain');
     res.status(200).send('jass development test server');
 });
 
 
 // On localhost:3001/services/gettablelist
-app.get(process.env.PASSENGER_BASE_URI+'/services/gettablelist', function (req, res) {
-    
+app.get(process.env.PASSENGER_BASE_URI + '/services/gettablelist', function (req, res) {
+
     //Append registred names of tables
     var tablesWithNames = [];
-    tables.forEach ((table, index) => {
+    tables.forEach((table, index) => {
 
         tablesWithNames[index] = JSON.parse(JSON.stringify(table)); //make a copy trick, otherwise it works with pointers
 
         //get names if the exists in files/memory
         if (typeof Models[table.icon] != 'undefined') {
-            var model = JSON.parse(Models[table.icon]);
+            var model = JSON.parse(Models[table.icon]);  //model is stored and transmitted as STRING
             //console.log(model);
             tablesWithNames[index].text += " [ Spieler: ";
             model.players.forEach((player, playerNumber) => {
-                if (playerNumber>0) {
+                if (playerNumber > 0) {
                     tablesWithNames[index].text += ", ";
                 }
                 tablesWithNames[index].text += player.name;
@@ -96,7 +96,7 @@ app.get(process.env.PASSENGER_BASE_URI+'/services/gettablelist', function (req, 
             //console.log(tables[index].players);
             tablesWithNames[index].text += " [ Spieler: ";
             tables[index].players.forEach((playerName, playerNumber) => {
-                if (playerNumber>0) {
+                if (playerNumber > 0) {
                     tablesWithNames[index].text += ", ";
                 }
                 tablesWithNames[index].text += playerName;
@@ -104,15 +104,15 @@ app.get(process.env.PASSENGER_BASE_URI+'/services/gettablelist', function (req, 
             tablesWithNames[index].text += " ]"
         };
     });
-    
-    
+
+
     res.status(200).send(tablesWithNames);
 });
 
 // On localhost:3001/services/getnodeplay
-app.get(process.env.PASSENGER_BASE_URI+'/services/getnodeplay', function (req, res) {
+app.get(process.env.PASSENGER_BASE_URI + '/services/getnodeplay', function (req, res) {
 
-    var tablename = 'a';
+    var tablename = 'a'; //default name if nothing defined
 
     //console.log("req: ",  req);
     //console.log("query: ", typeof req.query.tablename, req.query);
@@ -120,15 +120,29 @@ app.get(process.env.PASSENGER_BASE_URI+'/services/getnodeplay', function (req, r
         tablename = req.query.tablename;
     }
 
+    //check if tablename exists in memory/file, otherwise create from default and replace names
     if (typeof Models[tablename] === 'undefined') {
-        Models[tablename] = table_empty;
+        Models[tablename] = table_empty; //create default table
+
+        //replace names of players, if they exists in the template
+        tables.forEach((table) => {
+            if (table.icon === tablename) {
+                var model = JSON.parse(Models[tablename]);  //model is stored and transmitted as STRING
+                table.players.forEach((playerName, playerNumber) => {
+                    console.log(model.players[playerNumber].name , " <== ",  playerName);
+                    model.players[playerNumber].name = playerName;
+                });
+                Models[tablename] = JSON.stringify(model); //store back as string 
+            };
+
+        });
     }
 
     res.status(200).send(Models[tablename]);
 });
 
 // On localhost:3001/services/setnodeplay
-app.post(process.env.PASSENGER_BASE_URI+'/services/setnodeplay', function (req, res) {
+app.post(process.env.PASSENGER_BASE_URI + '/services/setnodeplay', function (req, res) {
 
     var tablename = 'a';
 
@@ -144,7 +158,7 @@ app.post(process.env.PASSENGER_BASE_URI+'/services/setnodeplay', function (req, 
 
 // Change the 404 message modifying the middleware
 app.use(function (req, res, next) {
-    res.status(404).send( `${buildPath} -->  not implemented URL :-( ${req.originalUrl} )`);
+    res.status(404).send(`${buildPath} -->  not implemented URL :-( ${req.originalUrl} )`);
 });
 
 
