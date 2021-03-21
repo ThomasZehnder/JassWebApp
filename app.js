@@ -188,7 +188,7 @@ app.post(process.env.PASSENGER_BASE_URI + '/services/setnodeplay', function (req
 
     //store to file
     try {
-        const tableStoreFilePath = path.join(tableStorePath, tablename +'.table');
+        const tableStoreFilePath = path.join(tableStorePath, tablename +'.json');
         fs.writeFileSync(tableStoreFilePath, body.model);
         console.log("stored to: ", tableStoreFilePath);
     } catch (err) {
