@@ -95,7 +95,7 @@ app.get(process.env.PASSENGER_BASE_URI + '/services/getdir', function (req, res)
         console.error(err);
     }
 
-    dir.text = "test 20210321";
+    dir.version = "last change 20210321";
     console.log(JSON.stringify(dir));
 
     res.status(200).send(JSON.stringify(dir));
@@ -110,6 +110,21 @@ app.get(process.env.PASSENGER_BASE_URI + '/services/gettablelist', function (req
     tables.forEach((table, index) => {
 
         tablesWithNames[index] = JSON.parse(JSON.stringify(table)); //make a copy trick, otherwise it works with pointers
+
+        //read table from file, if exist and initialisize memory
+        try {
+            const tableStoreFilePath = path.join(tableStorePath, table.icon + '.json');
+            if (fs.existsSync(tableStoreFilePath)) {
+                Models[table.icon] = fs.readFileSync(tableStoreFilePath);
+                console.log("read from: ", tableStoreFilePath);
+                tablesWithNames[index].text += "#";
+            }
+
+        } catch (err) {
+            console.log(err);
+
+            console.log("create default table in memory created");
+        }
 
         //get names if the exists in files/memory
         if (typeof Models[table.icon] != 'undefined') {
@@ -151,22 +166,36 @@ app.get(process.env.PASSENGER_BASE_URI + '/services/getnodeplay', function (req,
         tablename = req.query.tablename;
     }
 
-    //check if tablename exists in memory/file, otherwise create from default and replace names
+
+
+    //check if tablename exists in memory//, otherwise create from default and replace names
     if (typeof Models[tablename] === 'undefined') {
-        Models[tablename] = table_empty; //create default table
 
-        //replace names of players, if they exists in the template
-        tables.forEach((table) => {
-            if (table.icon === tablename) {
-                var model = JSON.parse(Models[tablename]);  //model is stored and transmitted as STRING
-                table.players.forEach((playerName, playerNumber) => {
-                    console.log(model.players[playerNumber].name, " <== ", playerName);
-                    model.players[playerNumber].name = playerName;
-                });
-                Models[tablename] = JSON.stringify(model); //store back as string 
-            };
+        //read table from file
+        try {
+            const tableStoreFilePath = path.join(tableStorePath, tablename + '.json');
+            Models[tablename] = fs.readFileSync(tableStoreFilePath);
+            console.log("read from: ", tableStoreFilePath);
 
-        });
+        } catch (err) {
+            console.log(err);
+
+            console.log("create default table in memory");
+            Models[tablename] = table_empty; //create default table
+
+            //replace names of players, if they exists in the template
+            tables.forEach((table) => {
+                if (table.icon === tablename) {
+                    var model = JSON.parse(Models[tablename]);  //model is stored and transmitted as STRING
+                    table.players.forEach((playerName, playerNumber) => {
+                        console.log(model.players[playerNumber].name, " <== ", playerName);
+                        model.players[playerNumber].name = playerName;
+                    });
+                    Models[tablename] = JSON.stringify(model); //store back as string 
+                };
+
+            });
+        }
     }
 
     res.status(200).send(Models[tablename]);
@@ -188,11 +217,11 @@ app.post(process.env.PASSENGER_BASE_URI + '/services/setnodeplay', function (req
 
     //store to file
     try {
-        const tableStoreFilePath = path.join(tableStorePath, tablename +'.json');
+        const tableStoreFilePath = path.join(tableStorePath, tablename + '.json');
         fs.writeFileSync(tableStoreFilePath, body.model);
         console.log("stored to: ", tableStoreFilePath);
     } catch (err) {
-        console.error(err);
+        console.log(err);
     }
 
     res.status(200).send(Models[tablename]);

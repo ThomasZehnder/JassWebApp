@@ -25,3 +25,10 @@ Nur existierende Spiel-Filenamen können verwendet werden. Neue Namen sind nicht
 
 * ./services/getplay?tablename=a
 * ./services/setplay POST JSON={tablename=a,model={JSON}}
+
+# Server seitig 
+
+Erstelle ein Objekt im memory, welches per webservice abgefragt wird mit dem Status des Servers.
+* Startzeit
+* letztes Spiel
+* pro spiel wie viele lesen und schreibzugriffe (memory und file)
