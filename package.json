@@ -24,7 +24,7 @@
     "build_react": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "push_git": "git push --set-upstream https://github.com/ThomasZehnder/JassWebApp.git master",
-    "node_express_server": "node server.js --port=3001",
+    "node_express_server": "node app.js --port=3001",
     "ftpToZhs_development_node.js tests": "node zhs_infos/deploy_dev",
     "---": "trennung",
     "ftpToZhs_productive_ATTENTION": "xx (entferne xx wenn productiv) node zhs_infos/deploy_remove_postfix"
