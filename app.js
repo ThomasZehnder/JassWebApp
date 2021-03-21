@@ -182,11 +182,18 @@ app.post(process.env.PASSENGER_BASE_URI + '/services/setnodeplay', function (req
     var body = req.body;
     var tablename = body.tablename;
 
-    //store in Memory
+    //store in memory
     Models[tablename] = body.model;
     console.log("written model: ", tablename);
 
-    //
+    //store to file
+    try {
+        const tableStoreFilePath = path.join(tableStorePath, tablename +'.table');
+        fs.writeFileSync(tableStoreFilePath, body.model);
+        console.log("stored to: ", tableStoreFilePath);
+    } catch (err) {
+        console.error(err);
+    }
 
     res.status(200).send(Models[tablename]);
 });
