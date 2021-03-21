@@ -7,6 +7,8 @@
 
 
 const path = require('path');
+const fs = require('fs');
+
 var express = require('express');
 var bodyParser = require("body-parser");
 var app = express();
@@ -76,7 +78,18 @@ app.get(process.env.PASSENGER_BASE_URI + '/test.txt', function (req, res) {
 // on ZHS: https://zhs.ch/node-js-test/getdir
 app.get(process.env.PASSENGER_BASE_URI + '/getdir', function (req, res) {
     res.setHeader('Content-type', 'application/json');
-    res.status(200).send('{test: "hallo"}');
+
+    // Mount tablestore folder
+    const tableStorePath = path.join(__dirname, '/server/tablestore');
+    try {
+        const files = fs.readdirSync(tableStorePath);
+        for (const file of files)
+          console.log(file);
+      } catch (err) {
+        console.error(err);
+      }
+
+    res.status(200).send('{"text": "hallo"}');
 });
 
 // On http://localhost:3001/services/gettablelist
@@ -138,7 +151,7 @@ app.get(process.env.PASSENGER_BASE_URI + '/services/getnodeplay', function (req,
             if (table.icon === tablename) {
                 var model = JSON.parse(Models[tablename]);  //model is stored and transmitted as STRING
                 table.players.forEach((playerName, playerNumber) => {
-                    console.log(model.players[playerNumber].name , " <== ",  playerName);
+                    console.log(model.players[playerNumber].name, " <== ", playerName);
                     model.players[playerNumber].name = playerName;
                 });
                 Models[tablename] = JSON.stringify(model); //store back as string 
