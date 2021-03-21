@@ -64,14 +64,23 @@ const buildPath = path.join(__dirname, '/build');
 app.use(process.env.PASSENGER_BASE_URI, express.static(buildPath));
 
 
-// on the request to root (localhost:3001/)
+// on the request to root (http://localhost:3001/test.txt)
+// on ZHS: https://zhs.ch/node-js-test/test.txt
+
 app.get(process.env.PASSENGER_BASE_URI + '/test.txt', function (req, res) {
     res.setHeader('Content-type', 'text/plain');
     res.status(200).send('jass development test server');
 });
 
+// on the request to root (http://localhost:3001/getdir)
+// on ZHS: https://zhs.ch/node-js-test/getdir
+app.get(process.env.PASSENGER_BASE_URI + '/getdir', function (req, res) {
+    res.setHeader('Content-type', 'application/json');
+    res.status(200).send('{test: "hallo"}');
+});
 
-// On localhost:3001/services/gettablelist
+// On http://localhost:3001/services/gettablelist
+// On ZHS: https://zhs.ch/node-js-test/services/getnodeplay?tablename=stefan
 app.get(process.env.PASSENGER_BASE_URI + '/services/gettablelist', function (req, res) {
 
     //Append registred names of tables

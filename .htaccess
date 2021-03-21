@@ -1,0 +1,41 @@
+AddDefaultCharset UTF-8
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>
+
+deny from 54.36.148.0/24
+deny from 54.36.149.0/24
+deny from 209.17.96.0/24
+deny from 127.0.0.1
+deny from 167.99.0.0/16
+deny from 138.246.253.1
+deny from 138.246.253.2/31
+deny from 138.246.253.4/30
+deny from 138.246.253.8/29
+deny from 138.246.253.16/28
+deny from 138.246.253.32/27
+deny from 138.246.253.64/26
+deny from 138.246.253.128/25
+deny from 165.227.124.0/24
+deny from 165.227.0.1
+deny from 165.227.0.2/31
+deny from 165.227.0.4/30
+deny from 165.227.0.8/29
+deny from 165.227.0.16/28
+
+deny from 165.227.0.64/26
+deny from 165.227.0.128/25
+deny from 165.227.1.0/24
+deny from 165.227.2.0/23
+deny from 165.227.4.0/22
+deny from 165.227.8.0/21
+deny from 165.227.16.0/20
+deny from 165.227.32.0/19
+deny from 165.227.64.0/18
+deny from 165.227.128.0/17
