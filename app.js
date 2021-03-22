@@ -38,8 +38,8 @@ if (typeof (process.env.PASSENGER_BASE_URI) === 'undefined') {
 console.log("process.env.PASSENGER_BASE_URI: ", process.env.PASSENGER_BASE_URI);
 
 //Here we are configuring express to use body-parser as middle-ware.
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 //
 app.all(process.env.PASSENGER_BASE_URI + '/services/*', function (req, res, next) {
@@ -162,10 +162,10 @@ app.get(process.env.PASSENGER_BASE_URI + '/services/getnodeplay', function (req,
 
     //console.log("req: ",  req);
     //console.log("query: ", typeof req.query.tablename, req.query);
+    //get tablename from query
     if (req.query.tablename) {
         tablename = req.query.tablename;
     }
-
 
 
     //check if tablename exists in memory//, otherwise create from default and replace names
