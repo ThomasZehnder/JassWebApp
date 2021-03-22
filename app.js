@@ -10,7 +10,6 @@ const path = require('path');
 const fs = require('fs');
 
 var express = require('express');
-var bodyParser = require("body-parser");
 var app = express();
 
 var table_a = require('./server/table_a');
